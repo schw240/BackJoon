@@ -1,0 +1,33 @@
+import java.util.Arrays;
+
+public class Main{
+    public static final int MAX = 10001;
+    public static int notSelfNum;
+    
+    public static void main(String[] args){
+        boolean[] selfArray = new boolean[MAX];
+        Arrays.fill(selfArray , true);
+        
+        for(int i = 1; i < MAX; i++){
+            notSelfNum = d(i);
+            if(notSelfNum < MAX){
+                selfArray[notSelfNum] = false;
+            }
+        }    
+        
+        for(int i = 1; i < MAX; i++){
+            if(selfArray[i]) {
+                System.out.println(i);
+            }
+        }
+    }
+    
+    private static int d(int n){
+        int dn = n;
+        while(n > 0) {
+            dn += n % 10;
+            n /= 10;
+        }
+        return dn;
+    }
+}
