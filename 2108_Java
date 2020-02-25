@@ -1,0 +1,81 @@
+import java.util.*;
+
+public class Main {
+
+    public static int avg(int[] arr) {
+        double res = 0;
+        double sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        res = Math.round(sum / arr.length);
+
+        return (int) Math.ceil(res);
+    }
+
+    public static int center(int[] arr){
+        return arr[(arr.length/2)];
+    }
+
+    public static int many(int[] arr){
+        int[] cnt = new int[8001];
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        int max = Integer.MIN_VALUE;
+
+        for(int i = 0; i < arr.length; i++){
+            if(i < 0){
+                cnt[Math.abs(i) + 4000]++;
+            } else{
+                cnt[i]++;
+            }
+        }
+
+        int idx = 0;
+        for(int i = 0; i < cnt.length; i++){
+            if(cnt[i] != 0 && cnt[i] > max){
+                max = cnt[i];
+                idx = i;
+            }
+        }
+
+        for(int i = 0; i < cnt.length; i++){
+            int tmp = i;
+            if(cnt[i] == max){
+                if(i > 4000){
+                    tmp-=4000;
+                    tmp*=-1;
+                    arrayList.add(tmp);
+
+                }else
+                    arrayList.add(i);
+            }
+        }
+        Collections.sort(arrayList);
+
+        if(arrayList.size() > 1)
+            return arrayList.get(1);
+        else
+            return arrayList.get(0);
+    }
+
+    public static int range(int[] arr){
+        return arr[arr.length-1] - arr[0];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        int[] arr = new int[num];
+        for(int i = 0; i < num; i++){
+            arr[i] = sc.nextInt();
+        }
+
+        Arrays.sort(arr);
+
+        System.out.println(avg(arr));
+        System.out.println(center(arr));
+        System.out.println(many(arr));
+        System.out.println(range(arr));
+
+    }
+}
