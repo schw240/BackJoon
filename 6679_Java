@@ -1,0 +1,68 @@
+public class Main {
+ public static void main(String[] args) throws Exception{
+  for(int i=1000; i<=9999; i++){
+   int num = i;
+   
+   String binary1 = Integer.toString(num,10);
+   String binary2 = Integer.toString(num,12);
+   String binary3 = Integer.toString(num,16);
+   
+   if(sum10(binary1) == sum12(binary2)){
+    if(sum12(binary2) == sum16(binary3)){
+     System.out.println(num);
+    }
+   }
+  }
+ }
+
+ static int sum10(String num){
+  String numArr[] = num.split("");
+  int sum = 0;
+  for(int i=0; i<numArr.length; i++){
+   sum += Integer.parseInt(numArr[i]);
+  }
+  return sum;
+ }
+
+ static int sum12(String num){
+  String numArr[] = num.split("");
+  int sum = 0;
+  for(int i=0; i<numArr.length; i++){
+   int tmp = 0;
+   if(numArr[i].equalsIgnoreCase("a")){
+    tmp = 10;
+   }else if(numArr[i].equalsIgnoreCase("b")){
+    tmp = 11;
+   }else{
+    tmp = Integer.parseInt(numArr[i]);
+   }
+   sum += tmp;
+  }
+  return sum;
+ }
+ 
+ static int sum16(String num){
+  String numArr[] = num.split("");
+  int sum = 0;
+  for(int i=0; i<numArr.length; i++){
+   int tmp = 0;
+   if(numArr[i].equalsIgnoreCase("a")){
+    tmp = 10;
+   }else if(numArr[i].equalsIgnoreCase("b")){
+    tmp = 11;
+   }else if(numArr[i].equalsIgnoreCase("c")){
+    tmp = 12;
+   }else if(numArr[i].equalsIgnoreCase("d")){
+    tmp = 13;
+   }else if(numArr[i].equalsIgnoreCase("e")){
+    tmp = 14;
+   }else if(numArr[i].equalsIgnoreCase("f")){
+    tmp = 15;
+   }else{
+    tmp = Integer.parseInt(numArr[i]);
+   }
+   sum += tmp;
+  }
+  return sum;
+ }
+}
