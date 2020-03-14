@@ -1,0 +1,52 @@
+import java.util.Scanner;
+import java.util.Set;
+
+
+
+public class Main{
+		public static int queen(int row, int n,int count, boolean[] eqrow, boolean[] rightdae, boolean[] leftdae) {
+			if(row>=n && count<n)
+				return 0;
+			
+			if(row>=n && count==n) 
+				return 1;
+			
+			
+			int result=0;
+			
+			for(int i=0; i<n; i++) { 
+				if(eqrow[i]==true)
+					continue;
+				if(rightdae[row+i]==true)
+					continue;
+				if(leftdae[i-row+n-1]==true)
+					continue;
+          
+				eqrow[i]=true;
+				rightdae[row+i]=true;
+				leftdae[i-row+n-1]=true;
+				
+				result+=queen(row+1, n, count+1, eqrow, rightdae, leftdae );
+
+				eqrow[i]=false;
+				rightdae[row+i]=false;
+				leftdae[i-row+n-1]=false;
+					
+				
+			}
+			
+			return result;
+		}
+	
+       public static void main(String[] args){
+    	   Scanner scan=new Scanner(System.in);
+    	   int n=scan.nextInt();
+    	   boolean[] eqrow=new boolean[n];
+    	   boolean[] rightdae=new boolean[n*n];
+    	   boolean[] leftdae=new boolean[n*n];
+    	   System.out.println(queen(0, n, 0 , eqrow, rightdae, leftdae));
+    	   
+       }
+       
+       
+}
