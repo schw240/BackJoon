@@ -1,0 +1,42 @@
+import java.util.Arrays;
+import java.util.Scanner;
+ 
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        int c = scan.nextInt();
+        scan.nextLine();
+        String [] alpha = scan.nextLine().split(" ");
+        
+        Arrays.parallelSort(alpha);
+        dfs(n, alpha, "", 0);
+    }
+    
+    public static boolean check(String password) {
+        int ja = 0;
+        int mo = 0;
+        for (char c : password.toCharArray()) {
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                mo += 1;
+            } else {
+                ja += 1;
+            }
+        }
+        return ja >= 2 && mo >= 1;
+    }
+    
+    public static void dfs(int n, String [] alpha, String password, int i) {
+        if(password.length() == n) { 
+            if(check(password)) {
+                System.out.println(password);
+            }
+            return;
+        }
+        if(alpha.length <= i) 
+            return;
+        
+        dfs(n, alpha, password+alpha[i], i+1);
+        dfs(n, alpha, password, i+1);
+    }
+}
